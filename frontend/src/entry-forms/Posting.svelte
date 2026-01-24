@@ -212,5 +212,9 @@
     div {
       padding-left: 0;
     }
+
+    .amount-wrapper {
+      flex-basis: 100%;
+    }
   }
 </style>
