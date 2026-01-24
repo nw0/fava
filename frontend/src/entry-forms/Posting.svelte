@@ -134,26 +134,28 @@
     {date}
     --autocomplete-wrapper-flex="2"
   />
-  <input
-    type="number"
-    class="amount-number"
-    placeholder={_("Amount")}
-    step="any"
-    value={parsed.number}
-    oninput={(e) => updateNumber(e.currentTarget.value)}
-  />
-  <select
-    class="amount-currency"
-    value={parsed.currency}
-    onchange={(e) => updateCurrency(e.currentTarget.value)}
-  >
-    {#each $currencies as currency}
-      <option value={currency}>{currency}</option>
-    {/each}
-    {#if !$currencies.includes(parsed.currency)}
-      <option value={parsed.currency}>{parsed.currency}</option>
-    {/if}
-  </select>
+  <span class="amount-wrapper">
+    <input
+      type="number"
+      class="amount-number"
+      placeholder={_("Amount")}
+      step="any"
+      value={parsed.number}
+      oninput={(e) => updateNumber(e.currentTarget.value)}
+    />
+    <select
+      class="amount-currency"
+      value={parsed.currency}
+      onchange={(e) => updateCurrency(e.currentTarget.value)}
+    >
+      {#each $currencies as currency}
+        <option value={currency}>{currency}</option>
+      {/each}
+      {#if !$currencies.includes(parsed.currency)}
+        <option value={parsed.currency}>{parsed.currency}</option>
+      {/if}
+    </select>
+  </span>
   <AddMetadataButton
     bind:meta={
       () => posting.meta,
@@ -190,13 +192,19 @@
     visibility: hidden;
   }
 
+  .amount-wrapper {
+    display: flex;
+    flex: 1;
+    gap: var(--flex-gap);
+  }
+
   .amount-number {
-    flex: 0.7;
+    flex: 2;
     min-width: 80px;
   }
 
   .amount-currency {
-    flex: 0.3;
+    flex: 1;
     min-width: 70px;
   }
 
